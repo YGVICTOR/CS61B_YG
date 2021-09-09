@@ -70,4 +70,36 @@ public class IntListTest {
       * to add a main method. See ArithmeticTest.java for an
       * example. */
 
+    /**
+     * Returns the reverse of the given IniList
+     * This method is destructive.If given null
+     * as an input, returns null.
+     *
+     * That the function returns a reversed list.
+     *
+     * That the function is destructive,
+     * i.e. when it is done running, the list pointed to by A has been tampered with.
+     *
+     * That the method handles a null input properly.
+     * */
+    @Test
+    public void testReverse() {
+        IntList A = IntList.of(1,2,3,4,5,6);
+        IntList expected = IntList.of(6,5,4,3,2,1);
+
+        assertEquals(expected,IntList.reverse(A));
+        assertNotEquals(IntList.of(1,2,3,4,5,6),A);
+
+        IntList B = null;
+        expected = null;
+        assertEquals(expected,IntList.reverse(B));
+
+
+    }
+
+    /* Run the unit tests in this file. */
+    public static void main(String... args) {
+        jh61b.junit.TestRunner.runTests("all", IntListTest.class);
+    }
 }
+
