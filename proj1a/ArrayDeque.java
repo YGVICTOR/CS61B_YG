@@ -1,10 +1,10 @@
 public class ArrayDeque<T> {
-    T[] storages;
-    int size;
-    int nextFirstIdx;
-    int nextLastIdx;
-    double usageFactor;
-    int maxCapacity;
+    private T[] storages;
+    private int size;
+    private int nextFirstIdx;
+    private int nextLastIdx;
+    private double usageFactor;
+    private int maxCapacity;
     private static final int REFACTOR = 2;
 
     public ArrayDeque(){
@@ -136,7 +136,7 @@ public class ArrayDeque<T> {
          }
          int target = nextLastIdx - 1;
          if(target < 0){
-             target = 0;
+             target = maxCapacity - 1;
          }
          return storages[target];
      }
@@ -149,7 +149,7 @@ public class ArrayDeque<T> {
              T result = helperGetLast();
              nextLastIdx -= 1;
              if (nextLastIdx < 0) {
-                 nextLastIdx = 0;
+                 nextLastIdx = maxCapacity-1;
              }
              size -= 1;
              storages[nextLastIdx] = null;
