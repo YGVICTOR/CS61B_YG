@@ -26,6 +26,9 @@ public class TestOffByOne {
         actual = offByOne.equalChars('z','a');
         assertFalse(actual);
 
+        actual = offByOne.equalChars('a','B');
+        assertFalse(actual);
+
         actual = offByOne.equalChars('&','%');
         assertTrue(actual);
     }
