@@ -15,19 +15,27 @@ public class BoringWorldDemo {
         // initialize the tile rendering engine with a window of size WIDTH x HEIGHT
         TERenderer ter = new TERenderer();
         ter.initialize(WIDTH, HEIGHT);
+        /**
+         * tile(陶瓷) renderer is an engine used to render（渲染） the world.
+         * */
 
         // initialize tiles
+        /**
+         * pre-generated tiles are stored in the Tileset class.
+         * */
         TETile[][] world = new TETile[WIDTH][HEIGHT];
         for (int x = 0; x < WIDTH; x += 1) {
             for (int y = 0; y < HEIGHT; y += 1) {
                 world[x][y] = Tileset.NOTHING;
+                //world[x][y] = Tileset.MOUNTAIN;
             }
         }
 
         // fills in a block 14 tiles wide by 4 tiles tall
         for (int x = 20; x < 35; x += 1) {
             for (int y = 5; y < 10; y += 1) {
-                world[x][y] = Tileset.WALL;
+                //world[x][y] = Tileset.WALL;
+                world[x][y] = Tileset.FLOWER;
             }
         }
 
