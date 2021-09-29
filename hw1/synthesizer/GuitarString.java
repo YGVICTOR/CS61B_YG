@@ -59,15 +59,4 @@ public class GuitarString {
         // TODO: Return the correct thing.
         return buffer.peek();
     }
-
-    public static void main(String[] args) {
-        GuitarString gs = new GuitarString(10000);
-        System.out.println("checkPoint");
-        gs.pluck();
-        for(Double element: (ArrayRingBuffer<Double>)gs.buffer){
-            System.out.println(element);
-        }
-
-    }
-
 }
