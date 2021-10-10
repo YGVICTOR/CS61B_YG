@@ -52,14 +52,14 @@ public class PercolationStats {
     }
 
 
-    public static void main(String[] args) {
-        PercolationStats p =new PercolationStats(20,20,new PercolationFactory());
-        System.out.println(p.mean());
-        //System.out.println(p.stddev());
-        System.out.println(p.confidenceLow());
-        //System.out.println(Math.sqrt(p.T));
-        System.out.println(p.confidenceHigh());
-    }
+//    public static void main(String[] args) {
+//        PercolationStats p =new PercolationStats(20,20,new PercolationFactory());
+//        System.out.println(p.mean());
+//        //System.out.println(p.stddev());
+//        System.out.println(p.confidenceLow());
+//        //System.out.println(Math.sqrt(p.T));
+//        System.out.println(p.confidenceHigh());
+//    }
 
 
 
