@@ -13,7 +13,7 @@ public class Percolation {
     // create N-by-N grid, with all sites initially blocked
     public Percolation(int N) {
         if(N <= 0){
-            throw new IndexOutOfBoundsException("N should always greater than zero");
+            throw new IllegalArgumentException("N should always greater than zero");
         }
         grid = new boolean[N][N];
         width = N;
@@ -152,5 +152,9 @@ public class Percolation {
     // does the system percolate?
     public boolean percolates(){
         return weightedQuickUnionUF.connected(width*height,width*height+1);
+    }
+
+    public static void main(String[] args) {
+        System.out.println("WELCOME");
     }
 }

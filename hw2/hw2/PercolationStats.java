@@ -15,10 +15,10 @@ public class PercolationStats {
         if(N<=0 || T<=0){
             throw new IllegalArgumentException("N and T should greater than 0");
         }
-        Percolation percolation = pf.make(N);
         thresholds = new double[T];
         this.T = T;
         for(int i=0;i<T;i++){
+            Percolation percolation = pf.make(N);
             while(!percolation.percolates()){
                 int randomRow =  edu.princeton.cs.introcs.StdRandom.uniform(N);
                 int randomCol =   edu.princeton.cs.introcs.StdRandom.uniform(N);
