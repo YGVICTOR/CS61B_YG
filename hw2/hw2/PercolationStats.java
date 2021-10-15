@@ -61,7 +61,4 @@ public class PercolationStats {
 //        System.out.println(p.confidenceHigh());
 //    }
 
-
-
-
 }
