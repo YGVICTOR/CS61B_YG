@@ -158,50 +158,50 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
         throw new UnsupportedOperationException();
     }
 
-    public static void main(String[] args) {
-
-
-        MyHashMap<String,Integer> myHashMap = new MyHashMap<>();
-        myHashMap.put("a",1);
-        myHashMap.put("b",2);
-        myHashMap.put("c",3);
-        myHashMap.put("d",4);
-        myHashMap.put("e",5);
-        myHashMap.put("f",6);
-        myHashMap.put("g",7);
-        myHashMap.put("h",8);
-        myHashMap.put("i",9);
-        myHashMap.put("j",10);
-        myHashMap.put("k",11);
-        myHashMap.put("l",12);
-        myHashMap.put("m",13);
-        myHashMap.put("n",14);
-        myHashMap.put("o",15);
-        myHashMap.put("p",16);
-        myHashMap.put("q",17);
-        myHashMap.put("r",18);
-        myHashMap.put("s",19);
-        myHashMap.put("t",20);
-        myHashMap.put("u",21);
-        myHashMap.put("v",22);
-        myHashMap.put("w",23);
-        myHashMap.put("x",24);
-        myHashMap.put("y",25);
-        myHashMap.put("z",26);
-//        for (int i = 0; i < 455; i++) {
-//            myHashMap.put("hi" + i, 1);
-//        }
-        //System.out.println(myHashMap.get("t"));
-
-        MyHashMap<String, String> dictionary = new MyHashMap<>();
-        dictionary.put("hello", "world");
-        dictionary.put("hello", "kevin");
-        System.out.println(dictionary.size());
-
-
-
-//        System.out.println(myHashMap.size());
-//        System.out.println(myHashMap.loadingSize);
-//        System.out.println(myHashMap.loadFactor());
-    }
+//    public static void main(String[] args) {
+//
+//
+//        MyHashMap<String,Integer> myHashMap = new MyHashMap<>();
+//        myHashMap.put("a",1);
+//        myHashMap.put("b",2);
+//        myHashMap.put("c",3);
+//        myHashMap.put("d",4);
+//        myHashMap.put("e",5);
+//        myHashMap.put("f",6);
+//        myHashMap.put("g",7);
+//        myHashMap.put("h",8);
+//        myHashMap.put("i",9);
+//        myHashMap.put("j",10);
+//        myHashMap.put("k",11);
+//        myHashMap.put("l",12);
+//        myHashMap.put("m",13);
+//        myHashMap.put("n",14);
+//        myHashMap.put("o",15);
+//        myHashMap.put("p",16);
+//        myHashMap.put("q",17);
+//        myHashMap.put("r",18);
+//        myHashMap.put("s",19);
+//        myHashMap.put("t",20);
+//        myHashMap.put("u",21);
+//        myHashMap.put("v",22);
+//        myHashMap.put("w",23);
+//        myHashMap.put("x",24);
+//        myHashMap.put("y",25);
+//        myHashMap.put("z",26);
+////        for (int i = 0; i < 455; i++) {
+////            myHashMap.put("hi" + i, 1);
+////        }
+//        //System.out.println(myHashMap.get("t"));
+//
+//        MyHashMap<String, String> dictionary = new MyHashMap<>();
+//        dictionary.put("hello", "world");
+//        dictionary.put("hello", "kevin");
+//        System.out.println(dictionary.size());
+//
+//
+//
+////        System.out.println(myHashMap.size());
+////        System.out.println(myHashMap.loadingSize);
+////        System.out.println(myHashMap.loadFactor());
+//    }
 }
