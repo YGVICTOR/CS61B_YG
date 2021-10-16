@@ -284,22 +284,34 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> ,Iterabl
             }
             //delete the root
             else{
-                Node ptr = node.left;
-                Node prePtr = node.left;
-                while(ptr.right != null){
-                    prePtr = ptr;
-                    ptr = ptr.right;
+                Node sudoRoot = new Node(null,null);
+                sudoRoot.left = root;
+                sudoRoot.right = root;
+                int flag = subCount(root);
+                switch (flag){
+                    case 0:
+                        root =null;
+                    case 1:
+                        try{
+                            V result = removeRightWithOneChild(sudoRoot);
+                            root = sudoRoot.right;
+                            return result;
+                        } catch (Exception e) {
+                            V result = removeLeftWithOneChild(sudoRoot);
+                            root = sudoRoot.left;
+                            return result;
+                        }
+                    case 2:
+                        try{
+                            V result = removeRightWithTwoChildren(sudoRoot);
+                            root = sudoRoot.right;
+                            return result;
+                        } catch (Exception e) {
+                            V result = removeLeftWithTwoChildren(sudoRoot);
+                            root = sudoRoot.left;
+                            return result;
+                        }
                 }
-                V result = node.value;
-                node.key = ptr.key;
-                node.value = ptr.value;
-                if(ptr.left == null){
-                    removeRightWithNoChild(prePtr);
-                }
-                else {
-                    removeRightWithOneChild(prePtr);
-                }
-                return result;
             }
         }
         return null;
@@ -367,19 +379,12 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> ,Iterabl
 
     public static void main(String[] args) {
         BSTMap<String, Integer> bstmap = new BSTMap<>();
-        bstmap.put("f", 1);
-        bstmap.put("d", 2);
-        bstmap.put("a", 3);
-        bstmap.put("i", 4);
-        bstmap.put("o",5);
-        bstmap.put("g",6);
-        bstmap.put("b",7);
-        bstmap.put("h",8);
-        bstmap.put("e",9);
-        bstmap.put("j",10);
-        //bstmap.put("p",11);
-        //bstmap.put("z",12);
-       // bstmap.put("p",11);
+        bstmap.put("z", 1);
+        bstmap.put("y",4);
+        bstmap.put("x", 2);
+        bstmap.put("w", 3);
+        bstmap.put("v", 3);
+
 
         //System.out.println(bstmap.get("fish"));
         //HashSet<String> keys= (HashSet<String>) bstmap.keySet();
@@ -387,7 +392,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> ,Iterabl
             System.out.println(key);
         }
 
-        //bstmap.remove("aaaa");
+        bstmap.remove("z");
         System.out.println("REMOVE TEST! GOD HELP");
         for(String key : bstmap){
             System.out.println(key);
