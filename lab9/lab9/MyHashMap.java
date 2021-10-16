@@ -1,6 +1,7 @@
 package lab9;
 
 import javax.management.MBeanAttributeInfo;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -19,6 +20,8 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
     private int size;
     private int loadingSize;
 
+    private HashSet<K> keys;
+
     private double loadFactor() {
         return loadingSize*1.0 / buckets.length;
     }
@@ -26,6 +29,7 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
     public MyHashMap() {
         buckets = new ArrayMap[DEFAULT_SIZE];
         this.clear();
+        keys = new HashSet<K>();
     }
 
     /* Removes all of the mappings from this map. */
@@ -134,7 +138,16 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
     /* Returns a Set view of the keys contained in this map. */
     @Override
     public Set<K> keySet() {
-        throw new UnsupportedOperationException();
+        keys.clear();
+        for(int i=0;i<buckets.length;i+=1){
+            if(buckets[i].size() != 0){
+                for(K element : buckets[i].keySet()){
+                    keys.add(element);
+                }
+            }
+        }
+        return keys;
+        //throw new UnsupportedOperationException();
     }
 
     /* Removes the mapping for the specified key from this map if exists.
@@ -142,7 +155,27 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
      * UnsupportedOperationException. */
     @Override
     public V remove(K key) {
-        throw new UnsupportedOperationException();
+        int hashCode = hash(key);
+        ArrayMap<K,V> startPoint = buckets[hashCode];
+        if(startPoint==null){
+            throw new RuntimeException("key : "+key+" doesn't exist");
+        }
+        else{
+            V result = startPoint.remove(key);
+            if(result != null){
+                size -= 1;
+                if(startPoint.size()==0){
+                    loadingSize -= 1;
+                }
+                if(loadFactor()<0.25){
+                    resize(buckets.length/2);
+                }
+                return result;
+            }
+            else{
+                return null;
+            }
+        }
     }
 
     /* Removes the entry for the specified key only if it is currently mapped to
@@ -150,12 +183,21 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
      * throw an UnsupportedOperationException.*/
     @Override
     public V remove(K key, V value) {
-        throw new UnsupportedOperationException();
+        int hashCode = hash(key);
+        V expected = buckets[hashCode].get(key);
+        if(expected.equals(value)){
+            return remove(key);
+        }
+        else{
+            return null;
+        }
+        //throw new UnsupportedOperationException();
     }
 
     @Override
     public Iterator<K> iterator() {
-        throw new UnsupportedOperationException();
+        return new HashMapIterator();
+        //throw new UnsupportedOperationException();
     }
 
 //    public static void main(String[] args) {
@@ -169,34 +211,47 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
 //        myHashMap.put("e",5);
 //        myHashMap.put("f",6);
 //        myHashMap.put("g",7);
-//        myHashMap.put("h",8);
-//        myHashMap.put("i",9);
-//        myHashMap.put("j",10);
-//        myHashMap.put("k",11);
-//        myHashMap.put("l",12);
-//        myHashMap.put("m",13);
-//        myHashMap.put("n",14);
-//        myHashMap.put("o",15);
-//        myHashMap.put("p",16);
-//        myHashMap.put("q",17);
-//        myHashMap.put("r",18);
-//        myHashMap.put("s",19);
-//        myHashMap.put("t",20);
-//        myHashMap.put("u",21);
-//        myHashMap.put("v",22);
-//        myHashMap.put("w",23);
-//        myHashMap.put("x",24);
-//        myHashMap.put("y",25);
-//        myHashMap.put("z",26);
+////        myHashMap.put("h",8);
+////        myHashMap.put("i",9);
+////        myHashMap.put("j",10);
+////        myHashMap.put("k",11);
+////        myHashMap.put("l",12);
+////        myHashMap.put("m",13);
+////        myHashMap.put("n",14);
+////        myHashMap.put("o",15);
+////        myHashMap.put("p",16);
+////        myHashMap.put("q",17);
+////        myHashMap.put("r",18);
+////        myHashMap.put("s",19);
+////        myHashMap.put("t",20);
+////        myHashMap.put("u",21);
+////        myHashMap.put("v",22);
+////        myHashMap.put("w",23);
+////        myHashMap.put("x",24);
+////        myHashMap.put("y",25);
+////        myHashMap.put("z",26);
+//        //HashSet<String> keyset = (HashSet<String>) myHashMap.keySet();
+//        for(String k:myHashMap){
+//            System.out.println(k);
+//
+//        }
+//        //myHashMap.remove("g");
+//        //myHashMap.remove("f");
+//        myHashMap.remove("g",7);
+//        System.out.println("AFTER REMOVE");
+////        keyset = (HashSet<String>) myHashMap.keySet();
+//        for(String k:myHashMap){
+//            System.out.println(k);
+//        }
 ////        for (int i = 0; i < 455; i++) {
 ////            myHashMap.put("hi" + i, 1);
 ////        }
 //        //System.out.println(myHashMap.get("t"));
 //
-//        MyHashMap<String, String> dictionary = new MyHashMap<>();
-//        dictionary.put("hello", "world");
-//        dictionary.put("hello", "kevin");
-//        System.out.println(dictionary.size());
+////        MyHashMap<String, String> dictionary = new MyHashMap<>();
+////        dictionary.put("hello", "world");
+////        dictionary.put("hello", "kevin");
+////        System.out.println(dictionary.size());
 //
 //
 //
@@ -204,4 +259,27 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
 ////        System.out.println(myHashMap.loadingSize);
 ////        System.out.println(myHashMap.loadFactor());
 //    }
+
+    private class HashMapIterator implements Iterator<K>{
+        int magicalPtr;
+         HashSet<K> copyOfKeys = (HashSet<K>) keySet();
+         ArrayDeque<K> dequeKeys= new ArrayDeque<K>();
+        private HashMapIterator(){
+            magicalPtr = 0;
+            for(K currentKey : copyOfKeys){
+                dequeKeys.addLast(currentKey);
+            }
+        }
+        @Override
+        public boolean hasNext() {
+            return magicalPtr < dequeKeys.size();
+        }
+
+        @Override
+        public K next() {
+            K result = dequeKeys.get(magicalPtr);
+            magicalPtr ++;
+            return result;
+        }
+    }
 }
