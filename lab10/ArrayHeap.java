@@ -28,7 +28,7 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      */
     private static int leftIndex(int i) {
         /* TODO: Your code here! */
-        return 0;
+        return 2*i;
     }
 
     /**
@@ -36,7 +36,7 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      */
     private static int rightIndex(int i) {
         /* TODO: Your code here! */
-        return 0;
+        return 2*i+1;
     }
 
     /**
@@ -44,7 +44,7 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
      */
     private static int parentIndex(int i) {
         /* TODO: Your code here! */
-        return 0;
+        return i/2;
     }
 
     /**
@@ -108,18 +108,131 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         validateSinkSwimArg(index);
 
         /** TODO: Your code here. */
+        int fatherIdx = parentIndex(index);
+        if(fatherIdx<1){
+            return;
+        }
+        while (getNode(fatherIdx).priority()>getNode(index).priority()){
+            swap(fatherIdx,index);
+            index = fatherIdx;
+            fatherIdx = parentIndex(index);
+            if(fatherIdx<1){
+                break;
+            }
+        }
         return;
     }
 
     /**
      * Bubbles down the node currently at the given index.
      */
+    private int sinkBoundaryHelper(int index){
+        int left = leftIndex(index);
+        int right = rightIndex(index);
+        /**
+         * both bigger return 1
+        **/
+        if(left > size() && right>size()){
+            return 1;
+        }
+        /**
+        * right bigger return 2;
+        * */
+        if(right>size()){
+            return 2;
+        }
+        /**
+         * left bigger return 3;
+         * */
+        if(left>size()){
+            return 3;
+        }
+        /**
+         * both smaller return 4;
+         * */
+            return 4;
+    }
+
+    private int sinkPriorityBothExistHelper(int index){
+        int left = leftIndex(index);
+        int right = rightIndex(index);
+        double currentPriority = getNode(index).priority();
+        double leftPriority =getNode(left).priority();
+        double  rightPriority = getNode(right).priority();
+        if( (leftPriority<currentPriority && rightPriority<currentPriority)
+                ||(leftPriority<currentPriority && rightPriority<=currentPriority)
+                ||(leftPriority<=currentPriority && rightPriority<currentPriority)
+                ||(leftPriority<=currentPriority && rightPriority<=currentPriority)
+        ){
+            if(leftPriority < rightPriority){
+                return left;
+            }
+            else{
+                return right;
+            }
+        }
+        else{
+            if(leftPriority<currentPriority && rightPriority>=currentPriority){
+                return left;
+            }
+            if(leftPriority>=currentPriority && rightPriority<currentPriority){
+                return right;
+            }
+            return -1;
+        }
+    }
+
+    private int sinkPriorityLeftExistHelper(int index){
+        int left = leftIndex(index);
+        double currentPriority = getNode(index).priority();
+        double leftPriority =getNode(left).priority();
+        if(leftPriority<currentPriority){
+            return left;
+        }
+        else{
+            return -1;
+        }
+    }
+
+    private int sinkPriorityRightExistHelper(int index){
+        int right = rightIndex(index);
+        double currentPriority = getNode(index).priority();
+        double rightPriority =getNode(right).priority();
+        if(rightPriority<currentPriority){
+            return right;
+        }
+        else{
+            return -1;
+        }
+    }
+
+    private int sinkIdx(int index){
+        int boundaryFlag = sinkBoundaryHelper(index);
+        switch (boundaryFlag){
+            case 1:
+                return -1;
+            case 2:
+                return sinkPriorityLeftExistHelper(index);
+            case 3:
+                return sinkPriorityRightExistHelper(index);
+            case 4:
+                return sinkPriorityBothExistHelper(index);
+        }
+        return -1;
+    }
+
+
     private void sink(int index) {
         // Throws an exception if index is invalid. DON'T CHANGE THIS LINE.
         validateSinkSwimArg(index);
 
         /** TODO: Your code here. */
-        return;
+        int sinkIdx = sinkIdx(index);
+        while(sinkIdx != -1){
+            swap(sinkIdx,index);
+            index = sinkIdx;
+            sinkIdx = sinkIdx(index);
+        }
     }
 
     /**
@@ -134,6 +247,10 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         }
 
         /* TODO: Your code here! */
+        contents[size+1] = new Node(item,priority);
+        int currentIdx = size + 1;
+        size +=1;
+        swim(currentIdx);
     }
 
     /**
@@ -143,7 +260,7 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
     @Override
     public T peek() {
         /* TODO: Your code here! */
-        return null;
+        return getNode(1).item();
     }
 
     /**
@@ -158,7 +275,11 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
     @Override
     public T removeMin() {
         /* TODO: Your code here! */
-        return null;
+        T reulst = peek();
+        swap(size(),1);
+        size -- ;
+        sink(1);
+        return reulst;
     }
 
     /**
@@ -413,5 +534,6 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
             i += 1;
         }
     }
+
 
 }
