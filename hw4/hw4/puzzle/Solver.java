@@ -4,7 +4,6 @@ import edu.princeton.cs.algs4.MinPQ;
 import edu.princeton.cs.algs4.Stack;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 public final class Solver {
     MinPQ<SearchNode> minPQ = new MinPQ<>();
@@ -59,21 +58,4 @@ public final class Solver {
 
         return solution;
     }
-
-//    public static void main(String[] args) {
-//        String start = "cube";
-//        String goal = "tubes";
-//        Word startState = new Word(start, goal);
-//        Solver solver = new Solver(startState);
-//        SearchNode currentSearchNode = solver.minPQ.delMin();
-//        Word cueerentContent = (Word) currentSearchNode.word;
-//        HashSet<WorldState> neighbours = (HashSet<WorldState>) cueerentContent.neighbors();
-//        for(WorldState w : neighbours){
-//            SearchNode newSearchNode = new SearchNode(w,currentSearchNode);
-//            newSearchNode.moveCnt = currentSearchNode.moveCnt+1;
-//            MinPQ<SearchNode> minPQ = new MinPQ<>();
-//
-//
-//        }
-//    }
 }
