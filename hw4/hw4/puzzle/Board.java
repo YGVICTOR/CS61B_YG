@@ -128,6 +128,7 @@ public class Board implements WorldState{
 
 
     }
+
     private int[][] to2DHelper(int i){
         int[][]  result = new int[1][2];
         if(i == 0){

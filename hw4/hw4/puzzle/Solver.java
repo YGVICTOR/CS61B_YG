@@ -23,7 +23,7 @@ public final class Solver {
         while(!minPQ.min().word.isGoal()){
             SearchNode currentNode = minPQ.delMin();
             for(WorldState word :currentNode.word.neighbors()){
-                if(currentNode.prev==null || !word.equals((currentNode.prev))){
+                if(currentNode.prev==null || !word.equals((currentNode.prev.word))){
                     SearchNode newSearchNode = new SearchNode(word,currentNode,currentNode.moveCnt+1);
                     minPQ.insert(newSearchNode);
                 }
