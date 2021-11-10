@@ -18,7 +18,7 @@ public final class Solver {
      **/
 
     public Solver(WorldState initial){
-        SearchNode searchNode = new SearchNode((Word) initial,null,0);
+        SearchNode searchNode = new SearchNode( initial,null,0);
         minPQ.insert(searchNode);
         while(!minPQ.min().word.isGoal()){
             SearchNode currentNode = minPQ.delMin();

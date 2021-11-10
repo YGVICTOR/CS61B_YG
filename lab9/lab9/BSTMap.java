@@ -185,6 +185,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> ,Iterabl
         }
         currentNode.left.key = potentialKey;
         currentNode.left.value = potentialValue;
+        size --;
         return result;
     }
 
@@ -226,6 +227,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> ,Iterabl
         }
         currentNode.right.key = potentialKey;
         currentNode.right.value = potentialValue;
+        size --;
         return result;
     }
 
