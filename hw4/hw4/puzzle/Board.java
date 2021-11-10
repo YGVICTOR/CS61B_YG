@@ -178,6 +178,9 @@ public class Board implements WorldState{
         s.append("\n");
         return s.toString();
     }
+    public int hashCode(){
+        return 0;
+    }
 
 
 }

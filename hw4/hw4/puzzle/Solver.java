@@ -5,9 +5,9 @@ import edu.princeton.cs.algs4.Stack;
 
 import java.util.ArrayList;
 
-public final class Solver {
-    MinPQ<SearchNode> minPQ = new MinPQ<>();
-    ArrayList<WorldState> solution  = new ArrayList<>();
+public class Solver {
+    private MinPQ<SearchNode> minPQ = new MinPQ<>();
+    private ArrayList<WorldState> solution  = new ArrayList<>();
     //private int totalCnt = 0 ;
     /**
      * Constructor which solves the puzzle, computing
@@ -17,6 +17,8 @@ public final class Solver {
      *
      **/
 
+    //把最小值从pq中搞出来，把邻居加进来，加进来后维护prev指针，当pq的堆顶是target的时候，顺着prev就能爬回start point；
+    //从堆顶是target开始，压栈，再弹栈，弹栈的顺序就是变化的过程；
     public Solver(WorldState initial){
         SearchNode searchNode = new SearchNode( initial,null,0);
         minPQ.insert(searchNode);
@@ -36,7 +38,6 @@ public final class Solver {
      * at the initial WorldState.
      * */
     public int moves(){
-
         return minPQ.min().moveCnt;
     }
 
@@ -55,7 +56,6 @@ public final class Solver {
         while(!stack.isEmpty()){
             solution.add(stack.pop());
         }
-
         return solution;
     }
 }
