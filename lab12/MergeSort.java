@@ -62,21 +62,22 @@ public class MergeSort {
             Queue<Item> q1, Queue<Item> q2) {
         // Your code here!
         Queue<Item> result = new Queue<>();
-        while(!q1.isEmpty() && !q2.isEmpty()){
+        while(!q1.isEmpty() || !q2.isEmpty()){
             Item current_minimum = getMin(q1,q2);
             result.enqueue(current_minimum);
         }
-        if(!q1.isEmpty()){
-            while(!q1.isEmpty()){
-                result.enqueue(q1.dequeue());
-            }
-        }
-        else{
-            while (!q2.isEmpty()){
-                result.enqueue(q2.dequeue());
-            }
-        }
         return result;
+//        if(!q1.isEmpty()){
+//            while(!q1.isEmpty()){
+//                result.enqueue(q1.dequeue());
+//            }
+//        }
+//        else{
+//            while (!q2.isEmpty()){
+//                result.enqueue(q2.dequeue());
+//            }
+//        }
+//        return result;
     }
 
     /** Returns a Queue that contains the given items sorted from least to greatest. */
@@ -87,21 +88,27 @@ public class MergeSort {
             return items;
         }
         else{
-            int size = items.size();
-            Queue<Item> firstHalf = new Queue<>();
-            Queue<Item> lastHalf = new Queue<>();
-            for(int i=0;i<size/2;i++){
-                firstHalf.enqueue(items.dequeue());
+//            int size = items.size();
+//            Queue<Item> firstHalf = new Queue<>();
+//            Queue<Item> lastHalf = new Queue<>();
+//            for(int i=0;i<size/2;i++){
+//                firstHalf.enqueue(items.dequeue());
+//            }
+//            while(!items.isEmpty()){
+//                lastHalf.enqueue(items.dequeue());
+//            }
+//            Queue<Item> sortedFirstHalf = mergeSort(firstHalf);
+//            Queue<Item> sortedSecondHalf = mergeSort(lastHalf);
+//            items =  mergeSortedQueues(sortedFirstHalf,sortedSecondHalf);
+            Queue<Queue<Item>> q = makeSingleItemQueues(items);
+            while (q.size() > 1) {
+                Queue<Item> q1 = q.dequeue();
+                Queue<Item> q2 = q.dequeue();
+                q.enqueue(mergeSortedQueues(q1, q2));
             }
-            while(!items.isEmpty()){
-                lastHalf.enqueue(items.dequeue());
-            }
-            Queue<Item> sortedFirstHalf = mergeSort(firstHalf);
-            Queue<Item> sortedSecondHalf = mergeSort(lastHalf);
-            items =  mergeSortedQueues(sortedFirstHalf,sortedSecondHalf);
-
+            return q.dequeue();
         }
-        return items;
+        //return items;
 
     }
 

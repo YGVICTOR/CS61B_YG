@@ -48,8 +48,7 @@ public class QuickSort {
             Queue<Item> unsorted, Item pivot,
             Queue<Item> less, Queue<Item> equal, Queue<Item> greater) {
         // Your code here!
-        while(!unsorted.isEmpty()){
-            Item current = unsorted.dequeue();
+        for (Item current: unsorted){
             if(current.compareTo(pivot)<0){
                 less.enqueue(current);
             }
@@ -60,7 +59,6 @@ public class QuickSort {
                 equal.enqueue(current);
             }
         }
-        unsorted = QuickSort.catenate(less,QuickSort.catenate(equal,greater));
     }
 
     /** Returns a Queue that contains the given items sorted from least to greatest. */
@@ -75,7 +73,6 @@ public class QuickSort {
         Queue<Item> less = new Queue<>();
         Queue<Item> greater = new Queue<>();
         QuickSort.partition(items,pivot,less,equal,greater);
-//        items = QuickSort.catenate(QuickSort.catenate(less,equal),greater);
         if (items.size()==1){
             return items;
         }
@@ -86,24 +83,24 @@ public class QuickSort {
 
     }
 
-    public static void main(String[] args) {
-        Queue<Integer> students = new Queue<>();
-        students.enqueue(6);
-        students.enqueue(4);
-        students.enqueue(0);
-
-
-        students.enqueue(3);
-        students.enqueue(7);
-        students.enqueue(0);
-
-        students.enqueue(2);
-        students.enqueue(4);
-        students.enqueue(7);
-
-
-        System.out.println(students);
-        System.out.println(quickSort(students));
-
-    }
+//    public static void main(String[] args) {
+//        Queue<Integer> students = new Queue<>();
+//        students.enqueue(6);
+//        students.enqueue(4);
+//        students.enqueue(0);
+//
+//
+//        students.enqueue(3);
+//        students.enqueue(7);
+//        students.enqueue(0);
+//
+//        students.enqueue(2);
+//        students.enqueue(4);
+//        students.enqueue(7);
+//
+//
+//        System.out.println(students);
+//        System.out.println(quickSort(students));
+//
+//    }
 }
