@@ -108,7 +108,13 @@ public class MergeSort {
                 Queue<Item> q2 = q.dequeue();
                 q.enqueue(mergeSortedQueues(q1, q2));
             }
-            return q.dequeue();
+            if(q.size() ==0){
+                return null;
+            }
+            else{
+                return q.dequeue();
+            }
+
         //}
         //return items;
 
@@ -117,7 +123,7 @@ public class MergeSort {
 //    public static void main(String[] args) {
 //        Queue<Integer> students = new Queue<>();
 //        students.enqueue(1);
-//        students.enqueue(3);
+////        students.enqueue(3);
 //        students.enqueue(2);
 //        students.enqueue(4);
 //        students.enqueue(6);
@@ -127,8 +133,8 @@ public class MergeSort {
 //        students.enqueue(7);
 //        students.enqueue(10);
 //        System.out.println(students.size());
-//
-//
+
+
 //        System.out.println(students);
 //        System.out.println(students.size());
 //        System.out.println(mergeSort(students));
