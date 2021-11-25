@@ -87,7 +87,7 @@ public class MergeSort {
         if(items.size() == 1 || items.isEmpty()){
             return items;
         }
-        else{
+        //else{
 //            int size = items.size();
 //            Queue<Item> firstHalf = new Queue<>();
 //            Queue<Item> lastHalf = new Queue<>();
@@ -107,19 +107,19 @@ public class MergeSort {
                 q.enqueue(mergeSortedQueues(q1, q2));
             }
             return q.dequeue();
-        }
+        //}
         //return items;
 
     }
 
-//    public static void main(String[] args) {
-//        Queue<String> students = new Queue<>();
-//        students.enqueue("Alice");
-//        students.enqueue("Vanessa");
-//        students.enqueue("Ethan");
-//
-//        System.out.println(students);
-//        System.out.println(mergeSort(students));
-//
-//    }
+    public static void main(String[] args) {
+        Queue<String> students = new Queue<>();
+        students.enqueue("Alice");
+        students.enqueue("Vanessa");
+        students.enqueue("Ethan");
+
+        System.out.println(students);
+        System.out.println(mergeSort(students));
+
+    }
 }
