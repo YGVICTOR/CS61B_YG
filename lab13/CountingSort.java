@@ -78,6 +78,7 @@ public class CountingSort {
         int[] result = naiveCountingSort(arr);
         for(int i=0;i<result.length;i++){
             result[i] = result[i]-Math.abs(min);
+            arr[i] = arr[i]-Math.abs(min);
         }
         return result;
     }

@@ -8,7 +8,16 @@ public class Test {
         for(String s : asciis){
             System.out.println(s);
         }
+        int value = (int)'A';
         System.out.println("test".concat(" "));
+        char value2 = (char)0;
+        System.out.println(value2);
+
+        System.out.println((int)' ');
+        int[] count = new int[256];
+        for(int current:count){
+            System.out.println(current);
+        }
 
     }
 
